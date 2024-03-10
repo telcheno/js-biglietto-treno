@@ -59,6 +59,7 @@ if(km > 0 && eta >= 0 && !isNaN(km) && !isNaN(eta)){
     //BONUS
     const priceElement = document.getElementById("price");
     console.log(priceElement);
+    // nel inserimento non va il ";" altrimenti non va il codice!!
     priceElement.innerHTML = "Il prezzo del biglieto è: " + prezzoTotale.toFixed(2) + "&euro;"
 
   } else{

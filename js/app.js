@@ -1,65 +1,69 @@
-// Chiedere al utente la DISTANZA da percorrere
-let distanza = prompt("Quanti Km devi percorrere?") //string | null
+console.log("Biglieto del treno");
 
-  // Trasformare il dato dal "prompt" da "string" a "number" per potere fare i calcoli
-    //Stampa nella console
-    distanza = parseInt(distanza);//number
-      console.log(distanza);
+// Chiedere al utente la DISTANZA da percorrere
+// -Trasformare il dato dal "prompt" da "string" a "number" per potere fare i calcoli
+const km = parseInt(prompt("Quanti Km devi percorrere?")) //number (prompt ritorna string | null) 
+console.log(km, typeof km);
 
 // Chiedere l'ETA del utente
-let eta = prompt("Quanti anni ha il passegiero");//string | null
+// -Trasformare il dato dal "prompt" da "string" a "number" per potere fare i calcoli
+const eta = parseInt(prompt("Quanti anni ha il passegiero"));//number (prompt ritorna string | null)
+console.log(eta, typeof eta);
 
-  // Trasformare il dato dal "prompt" da "string" a "number" per potere fare i calcoli
-    //Stampa nella console
-    eta = parseInt(eta);// number
-      console.log(eta);
+//validare i dati
+// - km > 0
+console.log(km > 0);
+// - eta >= 0
+console.log(eta >= 0);
+// - km non è NaN
+console.log(!isNaN(km));
+// - età non è NaN
+console.log(!isNaN(eta));
 
-// Calcolare il PREZZO TOTALE del biglieto del viaggio a seconda le seguenti condizioni:
-    // -Dichiarare il PREZZOKM base del Km (0.20€ al Km)
-      //Stampa nella console
+//SE i dati non sono validi
+if(km > 0 && eta >= 0 && !isNaN(km) && !isNaN(eta)){
 
-const prezzoKm = 0.20; //number
-let prezzoTotale = prezzoKm * distanza; 
-console.log(prezzoTotale); //number
+    // Calcolare il PREZZO TOTALE del biglieto del viaggio a seconda le seguenti condizioni:
+    // -Dichiarare il PREZZOKM base del Km (0.21€ al Km)
+    const prezzoKm = 0.21; //number
+    const prezzoBase = prezzoKm * km;
+    console.log(prezzoBase, typeof prezzoBase); //number
 
-  // -Dichiara lo SCONTO per i MINORENI di 20% dal PREZZO TOTALE
-const sconto20 = 0.2; //number
-let scontoMinoreni;
-  // -Dichiara lo SCONTO per i OVER 65 di 40% dal PREZZO TOTALE
-const sconto40 = 0.4;
+    // -Dichiara lo SCONTO per i MINORENI di 20% dal PREZZO BASE
+    let sconto = 0; //number
+    console.log(sconto, typeof sconto)
 
-// CALCOLO DELLO SOCONTO
+    // CALCOLO DELLO SOCONTO
 
-// SE ETA è < 18
-if(eta < 18){
-  //SCONTOMINOTENI = PREZZOTOTALE - SCONTOMINORENI
-  scontoMinoreni = prezzoTotale - (prezzoTotale * sconto20);
-  console.log(scontoMinoreni);
+    // "le variabili dichiarate dentro le condizionali non posono essere ragiunte dal di fuori di essa!""
 
-    //Mostra in console il PREZZOTOTALE - SCONTOMINOTENI 
-    //Arotonda il PREZZOTOTALE  con solo 2 decimali come centesimi
-  let prezzoMinoreni = scontoMinoreni.toFixed(2);
-  console.log(prezzoMinoreni);
+    // SE ETA è < 18 => sconto 20%
+    if(eta < 18){
+      sconto = 0.2;// number
+      
+      //ALTRIMENTI SE ETA è >= 65 sconto 40%
+    } else if (eta >= 65){
+      sconto = 0.4;// number
+      
+    } 
 
-  //ALTRIMENTI SE ETA è >= 65
-} else if (eta >= 65){
-    //SCONTOOVER_65 = PREZZOTOTALE * SCONTO65
-  scontoOver_65 = prezzoTotale - (prezzoTotale * sconto40);
-  console.log(scontoOver_65);
+    /* "bloco non indispensabile per che la variabile già dichiarata 
+    ALTRIMENTI sconto 0%
+    else{
+      sconto = 0; // number
+    } */
 
-    //Mostra in console il PREZZOTOTALE - SCONTOOVER_65
-    //Arotonda il PREZZOTOTALE  con solo 2 decimali come centesimi
-  let prezzoOver_65 = scontoOver_65.toFixed(2);
-  console.log(prezzoOver_65);
-  //ALTRIMENTI
-} else{
-    //Mostra PREZZOTOTALE
-    //Arotonda il PREZZOTOTALE  con solo 2 decimali come centesimi
-  prezzoTotale = prezzoTotale.toFixed(2);
-  console.log(prezzoTotale);
-}
+    const prezzoTotale = prezzoBase - prezzoBase * sconto; // number
+    console.log(prezzoTotale.toFixed(2), prezzoTotale);// toFixed ritorna un string come dato
+    
+    //BONUS
+    const priceElement = document.getElementById("price");
+    console.log(priceElement);
+    priceElement.innerHTML = "Il prezzo del biglieto è: " + prezzoTotale.toFixed(2) + "&euro;"
 
-
-
-
-
+  } else{
+    //ALTRIMWNRTI 
+    // -stampare che i dati non sono validi
+    alert("I dati non sono validi");
+  }
+  

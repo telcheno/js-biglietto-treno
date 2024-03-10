@@ -6,3 +6,10 @@ img{
 .logoBoolean{
   height: 150px;
 }
+
+p{
+  text-align: center;
+  font-size: 25px;
+  background-color: rgb(34, 34, 116);
+  color: white;
+}
